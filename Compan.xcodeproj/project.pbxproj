@@ -15,6 +15,7 @@
 		C528B1E4221AFB94007E6906 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C528B1E2221AFB94007E6906 /* LaunchScreen.storyboard */; };
 		C528B1EC221B19EB007E6906 /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C528B1EB221B19EB007E6906 /* UIColor+theme.swift */; };
 		C528B1EE221B1E6D007E6906 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = C528B1ED221B1E6D007E6906 /* Company.swift */; };
+		C556CA4F221B271200CAAE3E /* CreateCompanyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C556CA4E221B271200CAAE3E /* CreateCompanyController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		C528B1E5221AFB94007E6906 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C528B1EB221B19EB007E6906 /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		C528B1ED221B1E6D007E6906 /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
+		C556CA4E221B271200CAAE3E /* CreateCompanyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			children = (
 				C528B1D6221AFB93007E6906 /* AppDelegate.swift */,
 				C528B1D8221AFB93007E6906 /* CompaniesController.swift */,
+				C556CA4E221B271200CAAE3E /* CreateCompanyController.swift */,
 				C528B1DA221AFB93007E6906 /* Main.storyboard */,
 				C528B1E0221AFB94007E6906 /* Assets.xcassets */,
 				C528B1E2221AFB94007E6906 /* LaunchScreen.storyboard */,
@@ -149,6 +152,7 @@
 				C528B1D9221AFB93007E6906 /* CompaniesController.swift in Sources */,
 				C528B1EE221B1E6D007E6906 /* Company.swift in Sources */,
 				C528B1D7221AFB93007E6906 /* AppDelegate.swift in Sources */,
+				C556CA4F221B271200CAAE3E /* CreateCompanyController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,7 +19,6 @@ class CompaniesController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        setupNavigationController()
         
         view.backgroundColor = .white
         navigationItem.title = "Companies"
@@ -35,22 +34,12 @@ class CompaniesController: UITableViewController {
     
     @objc func handleAddCompany() {
         
-        let createCompanyController = UIViewController()
-        createCompanyController.view.backgroundColor = .green
+        let createCompanyController = CreateCompanyController()
+        let navController = CustomNavigationController(rootViewController: createCompanyController)
         
-        present(createCompanyController, animated: true, completion: nil)
+        present(navController, animated: true, completion: nil)
         
         print("adding company ...")
-    }
-
-    func setupNavigationController() {
-        
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barTintColor = .lightRed
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.tintColor = .white
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
