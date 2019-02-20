@@ -20,20 +20,13 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
     }
     
     private func fetchCompanies() {
-        // initialization of Core Data Stack:
-        let persistentContainer = NSPersistentContainer(name: "Compan")
-        persistentContainer.loadPersistentStores { (storeDescription, err) in
-            if let err = err {
-                fatalError("Loading of store failed: \(err)")
-            }
-        }
-        
-        let context = persistentContainer.viewContext
+        let context = CoreDataManager.shared.persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
         
         do {
             try companies =  context.fetch(fetchRequest)
+            self.tableView.reloadData()
         } catch let fetchErr {
             print("Failed to fetch companies: \(fetchErr)")
         }
