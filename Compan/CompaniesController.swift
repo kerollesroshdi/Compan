@@ -95,5 +95,28 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return companies.count
     }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (_, indexPath) in
+            // remove the company from tableview
+            let companyToBeDeleted = self.companies[indexPath.row]
+            self.companies.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .top)
+            // delete the company from coredata
+            let context = CoreDataManager.shared.persistentContainer.viewContext
+            context.delete(companyToBeDeleted)
+            do {
+                try context.save()
+            } catch let saveErr {
+                print("Failed to delete Company:", saveErr)
+            }
+        }
+        
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (_, indexPath) in
+            print("editing company:", self.companies[indexPath.row])
+        }
+        
+        return [deleteAction, editAction]
+    }
 }
 
