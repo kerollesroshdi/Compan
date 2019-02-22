@@ -20,8 +20,13 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
     var company: Company? {
         didSet {
             nameTextField.text = company?.name
+            
             guard let founded = company?.founded else { return }
             datePicker.date = founded
+            
+            if let imageData = company?.imageData {
+                companyImageView.image = UIImage(data: imageData)
+            }
         }
     }
     
@@ -29,6 +34,7 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
     
     lazy var companyImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "select_photo_empty"))
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectPhoto)))
@@ -87,6 +93,13 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context)
         company.setValue(nameTextField.text, forKey: "name")
         company.setValue(datePicker.date, forKey: "founded")
+        
+        if let companyImage = companyImageView.image {
+            let imageData = companyImage.jpegData(compressionQuality: 0.8)
+            company.setValue(imageData, forKey: "imageData")
+        }
+        
+        
         // perform the save :
         do {
             try context.save()
@@ -103,6 +116,12 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         let context = CoreDataManager.shared.persistentContainer.viewContext
         company?.name = nameTextField.text
         company?.founded = datePicker.date
+        
+        if let companyImage = companyImageView.image {
+            let imageData = companyImage.jpegData(compressionQuality: 0.8)
+            company?.imageData = imageData
+        }
+        
         do {
             try context.save()
             // success :
@@ -155,6 +174,11 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         companyImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         companyImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
         companyImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        // making image circular
+        companyImageView.layer.cornerRadius = companyImageView.frame.width / 2
+        companyImageView.layer.borderColor = UIColor.darkBlue.cgColor
+        companyImageView.layer.borderWidth = 2
+        companyImageView.clipsToBounds = true
         
         view.addSubview(nameLabel)
         nameLabel.topAnchor.constraint(equalTo: companyImageView.bottomAnchor).isActive = true
