@@ -74,8 +74,8 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         
         view.backgroundColor = .darkBlue
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDone))
+        setupCancelButtonInNavBar()
+        setupDoneButtonInNavBar(selector: #selector(handleDone))
     }
     
     @objc func handleDone(){
@@ -132,10 +132,6 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
             print("Failed to update company:", saveErr)
         }
         
-    }
-    
-    @objc func handleCancel() {
-        dismiss(animated: true, completion: nil)
     }
     
     @objc private func handleSelectPhoto() {
