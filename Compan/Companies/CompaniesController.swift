@@ -63,7 +63,7 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
 //        tableView.separatorStyle = .none
         tableView.separatorColor = .white
         tableView.tableFooterView = UIView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
+        tableView.register(CompanyCell  .self, forCellReuseIdentifier: "cellId")
     }
     
     @objc private func handleReset() {
@@ -122,32 +122,13 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
-        let company = companies[indexPath.row]
-        
-        if let name = company.name, let founded = company.founded {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd MMM yyyy"
-            let foundedDate = dateFormatter.string(from: founded)
-            cell.textLabel?.text = "\(name) - Founded: \(foundedDate)"
-        } else {
-            cell.textLabel?.text = company.name
-        }
-        
-        cell.backgroundColor = .teal
-        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        cell.textLabel?.textColor = .white
-        
-        cell.imageView?.image = #imageLiteral(resourceName: "select_photo_empty")
-//        cell.imageView?.layer.cornerRadius = (cell.imageView?.frame.width)! / 2
-//        cell.imageView?.clipsToBounds = true
-//        cell.imageView?.layer.masksToBounds = true
-        
-        if let imageData = company.imageData {
-            cell.imageView?.image = UIImage(data: imageData)
-        }
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! CompanyCell
+        cell.company = companies[indexPath.row]
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 65
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

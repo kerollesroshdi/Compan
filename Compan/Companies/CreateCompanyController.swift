@@ -177,7 +177,7 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         // making image circular
         companyImageView.layer.cornerRadius = companyImageView.frame.width / 2
         companyImageView.layer.borderColor = UIColor.darkBlue.cgColor
-        companyImageView.layer.borderWidth = 2
+        companyImageView.layer.borderWidth = 1
         companyImageView.clipsToBounds = true
         
         view.addSubview(nameLabel)
