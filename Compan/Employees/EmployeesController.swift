@@ -20,6 +20,7 @@ class EmployeesController: UITableViewController {
         super.viewDidLoad()
         
         tableView.backgroundColor = .darkBlue
+        tableView.tableFooterView = UIView()
         setupPlusButtonInNavBar(selector: #selector(handelAddEmployee))
     }
     
