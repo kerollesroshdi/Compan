@@ -36,7 +36,11 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         let employee = employees[indexPath.row]
-        cell.textLabel?.text = "\(employee.name ?? "") -TaxID:  \(employee.employeeInformation?.taxID ?? "")"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM yyyy"
+        
+        cell.textLabel?.text = "\(employee.name ?? "") -TaxID:  \(employee.employeeInformation?.taxID ?? "") - BD: \(dateFormatter.string(from: employee.employeeInformation?.birthday ?? Date()))"
         return cell
     }
     
