@@ -55,19 +55,24 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
         
         let createEmployeeController = CreateEmployeeController()
         createEmployeeController.delegate = self
+        createEmployeeController.company = company
         let navController = UINavigationController(rootViewController: createEmployeeController)
         present(navController,animated: true)
     }
     
     private func fetchEmployees() {
-        let context = CoreDataManager.shared.persistentContainer.viewContext
-        let request = NSFetchRequest<Employee>(entityName: "Employee")
         
-        do {
-            let employees = try context.fetch(request)
-            self.employees = employees
-        } catch let fetchErr {
-            print("Failed to fetch Employees:", fetchErr)
-        }
+        guard let companyEmployees = company?.employees?.allObjects as? [Employee] else { return }
+        self.employees = companyEmployees
+        
+//        let context = CoreDataManager.shared.persistentContainer.viewContext
+//        let request = NSFetchRequest<Employee>(entityName: "Employee")
+//
+//        do {
+//            let employees = try context.fetch(request)
+//            self.employees = employees
+//        } catch let fetchErr {
+//            print("Failed to fetch Employees:", fetchErr)
+//        }
     }
 }

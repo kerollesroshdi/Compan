@@ -10,10 +10,12 @@
         <attribute name="founded" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="employees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Employee" inverseName="company" inverseEntity="Employee" syncable="YES"/>
     </entity>
     <entity name="Employee" representedClassName="Employee" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="address" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Address" inverseName="employee" inverseEntity="Address" syncable="YES"/>
+        <relationship name="company" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Company" inverseName="employees" inverseEntity="Company" syncable="YES"/>
         <relationship name="employeeInformation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EmployeeInfo" inverseName="employee" inverseEntity="EmployeeInfo" syncable="YES"/>
     </entity>
     <entity name="EmployeeInfo" representedClassName="EmployeeInfo" syncable="YES" codeGenerationType="class">
@@ -22,9 +24,9 @@
         <relationship name="employee" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Employee" inverseName="employeeInformation" inverseEntity="Employee" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Company" positionX="-62.26171875" positionY="-131.09765625" width="128" height="90"/>
-        <element name="Employee" positionX="-63" positionY="9" width="128" height="90"/>
-        <element name="EmployeeInfo" positionX="179.73828125" positionY="122.703125" width="128" height="90"/>
         <element name="Address" positionX="179.5390625" positionY="-64.79296875" width="128" height="105"/>
+        <element name="Company" positionX="-59.4609375" positionY="-230.16796875" width="128" height="105"/>
+        <element name="Employee" positionX="-63" positionY="9" width="128" height="105"/>
+        <element name="EmployeeInfo" positionX="179.73828125" positionY="122.703125" width="128" height="90"/>
     </elements>
 </model>
