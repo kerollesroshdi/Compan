@@ -45,6 +45,15 @@ class CreateEmployeeController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
+    
+    let employeeTypeSegmentedControl: UISegmentedControl = {
+        let types = ["Staff", "Manager", "CEO"]
+        let sc = UISegmentedControl(items: types)
+        sc.selectedSegmentIndex = 0
+        sc.tintColor = .darkBlue
+        sc.translatesAutoresizingMaskIntoConstraints = false
+        return sc
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +89,9 @@ class CreateEmployeeController: UIViewController {
             return
         }
         
-        let tuple = CoreDataManager.shared.createEmployee(WithName: employeeName, birthday: birthdayDate, andCompany: company)
+        guard let employeeType = employeeTypeSegmentedControl.titleForSegment(at: employeeTypeSegmentedControl.selectedSegmentIndex) else { return }
+        
+        let tuple = CoreDataManager.shared.createEmployee(WithName: employeeName, birthday: birthdayDate, employeeType: employeeType, andCompany: company)
         if let error = tuple.1 {
             print("Employee Creation Error:", error)
         } else {
@@ -91,7 +102,7 @@ class CreateEmployeeController: UIViewController {
     }
     
     private func setupUI() {
-        let lightBlueBackgroundView = setupLightBlueBackgroundView(withHight: 200)
+        let lightBlueBackgroundView = setupLightBlueBackgroundView(withHight: 180)
         
         view.addSubview(nameLabel)
         nameLabel.topAnchor.constraint(equalTo: lightBlueBackgroundView.topAnchor).isActive = true
@@ -117,6 +128,11 @@ class CreateEmployeeController: UIViewController {
         birthdayTextField.bottomAnchor.constraint(equalTo: birthdayLabel.bottomAnchor).isActive = true
         birthdayTextField.topAnchor.constraint(equalTo: birthdayLabel.topAnchor).isActive = true
         
+        view.addSubview(employeeTypeSegmentedControl)
+        employeeTypeSegmentedControl.leftAnchor.constraint(equalTo: birthdayLabel.leftAnchor).isActive = true
+        employeeTypeSegmentedControl.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        employeeTypeSegmentedControl.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        employeeTypeSegmentedControl.topAnchor.constraint(equalTo: birthdayLabel.bottomAnchor, constant: 16).isActive = true
     }
     
     private func showErrorAlert(title: String, message: String, actionTitle: String) {
