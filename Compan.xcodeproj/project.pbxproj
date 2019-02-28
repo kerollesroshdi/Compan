@@ -23,6 +23,7 @@
 		C5E34FFB2221BA33001A16BD /* EmployeesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E34FFA2221BA33001A16BD /* EmployeesController.swift */; };
 		C5E34FFE2221BDCF001A16BD /* UIViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E34FFD2221BDCF001A16BD /* UIViewController+Helpers.swift */; };
 		C5E350012221C4B9001A16BD /* CreateEmployeeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E350002221C4B9001A16BD /* CreateEmployeeController.swift */; };
+		C5F7EE9A222885BB004FBE7D /* EmployeeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F7EE99222885BB004FBE7D /* EmployeeType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		C5E34FFA2221BA33001A16BD /* EmployeesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesController.swift; sourceTree = "<group>"; };
 		C5E34FFD2221BDCF001A16BD /* UIViewController+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Helpers.swift"; sourceTree = "<group>"; };
 		C5E350002221C4B9001A16BD /* CreateEmployeeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEmployeeController.swift; sourceTree = "<group>"; };
+		C5F7EE99222885BB004FBE7D /* EmployeeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 			children = (
 				C5E34FFA2221BA33001A16BD /* EmployeesController.swift */,
 				C5E350002221C4B9001A16BD /* CreateEmployeeController.swift */,
+				C5F7EE99222885BB004FBE7D /* EmployeeType.swift */,
 			);
 			path = Employees;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 				C5E34FFE2221BDCF001A16BD /* UIViewController+Helpers.swift in Sources */,
 				C50B3C392220B7ED00096602 /* CompanyCell.swift in Sources */,
 				C5E34FF92221AE87001A16BD /* CompaniesController+UITableView.swift in Sources */,
+				C5F7EE9A222885BB004FBE7D /* EmployeeType.swift in Sources */,
 				C5E350012221C4B9001A16BD /* CreateEmployeeController.swift in Sources */,
 				C5E34FFB2221BA33001A16BD /* EmployeesController.swift in Sources */,
 				C528B1EE221B1E6D007E6906 /* Company.swift in Sources */,

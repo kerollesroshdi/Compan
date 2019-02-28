@@ -18,15 +18,15 @@ class IntendedLabel: UILabel {
 
 class EmployeesController: UITableViewController, CreateEmployeeControllerDelegate {
     func didAddEmployee(employee: Employee) {
-//        employees.append(employee)
-//        tableView.insertRows(at: [IndexPath(row: employees.count - 1, section: 0)], with: .top)
-        fetchEmployees()
-        tableView.reloadData()
         
-        // to animate tableView ReloadData
-//        UIView.transition(with: tableView, duration: 0.30, options: .transitionCurlDown, animations: {
-//            self.tableView.reloadData()
-//        }, completion: nil)
+        
+
+        guard let section = employeeTypes.index(of: employee.type!) else { return }
+        let row = allEmployees[section].count
+        let indexPath = IndexPath(row: row, section: section)
+        
+        allEmployees[section].append(employee)
+        tableView.insertRows(at: [indexPath], with: .top)
     }
     
     
@@ -36,7 +36,7 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
         }
     }
     
-    var employees = [Employee]()
+    let employeeTypes = [ EmployeeType.CEO.rawValue, EmployeeType.Manager.rawValue, EmployeeType.Staff.rawValue]
     
     let cellId = "employeeCell"
     
@@ -66,13 +66,7 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = IntendedLabel()
-        if section == 0 {
-            label.text = "Short names"
-        } else if section == 1 {
-            label.text = "Long names"
-        } else {
-            label.text = "Really long names"
-        }
+        label.text = employeeTypes[section]
         label.backgroundColor = .lightBlue
         label.textColor = .darkBlue
         label.font = UIFont.boldSystemFont(ofSize: 16)
@@ -83,10 +77,6 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
-    
-    var shortNamesEmployees = [Employee]()
-    var longNamesEmployees = [Employee]()
-    var reallyLongNamesEmployees = [Employee]()
     
     var allEmployees = [[Employee]]()
     
@@ -113,39 +103,11 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
     private func fetchEmployees() {
         
         guard let companyEmployees = company?.employees?.allObjects as? [Employee] else { return }
-        self.employees = companyEmployees
         
-        shortNamesEmployees = companyEmployees.filter({ (employee) -> Bool in
-            if let count = employee.name?.count {
-                return count < 6
-            }
-            return false
-        })
+        allEmployees = []
+        employeeTypes.forEach { (employeeType) in
+            allEmployees.append(companyEmployees.filter { $0.type == employeeType })
+        }
         
-        longNamesEmployees = companyEmployees.filter({ (employee) -> Bool in
-            if let count = employee.name?.count {
-                return count > 6 && count < 9
-            }
-            return false
-        })
-        
-        reallyLongNamesEmployees = companyEmployees.filter({ (employee) -> Bool in
-            if let count = employee.name?.count {
-                return count > 9
-            }
-            return false
-        })
-        
-        allEmployees = [shortNamesEmployees, longNamesEmployees, reallyLongNamesEmployees]
-        
-//        let context = CoreDataManager.shared.persistentContainer.viewContext
-//        let request = NSFetchRequest<Employee>(entityName: "Employee")
-//
-//        do {
-//            let employees = try context.fetch(request)
-//            self.employees = employees
-//        } catch let fetchErr {
-//            print("Failed to fetch Employees:", fetchErr)
-//        }
     }
 }
